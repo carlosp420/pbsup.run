@@ -1,10 +1,13 @@
 beep -;
+mxram 2000;
+macro*15 2000;
 macro=;  
 macreport-;
 silent = all ;  
 lquote[ ;  
+
 if ( argnumber < 1 )
-        silent -console
+        silent -console;
 	quote &10&10&32   /-----------------------------------------------\;
 	quote &32   |     You need to give an argument in this way: |;
 	quote &32   |                                               |;
@@ -15,6 +18,7 @@ if ( argnumber < 1 )
 	quote &32   \-----------------------------------------------/&10&10;
         proc/; 
 end
+
 /*****************************************************************************\
  This TNT script gets Partitioned Bremer Support (PBS) values from
  any number of partitions.
@@ -32,7 +36,10 @@ end
     respective nodes.
 
  Carlos Pena 2006-09-29
+
+ Added commands mxram and macro* to increase RAM memory allocation for big datasets [Carlos Pena 2012-02-16]
 \*****************************************************************************/
+
 rseed 0;
 macseed 0; 
 loop 0 maxvars 
@@ -43,8 +50,7 @@ stop
 p dataset.tnt;
 
 /** search parameters **/
-hold 10000
-hol 100 ;
+hold 1000;
 
 xmult: level 10 fuse 5 drift 30 rss css xss rat 50;
 sec: slack 20 ;
@@ -63,6 +69,7 @@ keep 0;
 p alltrees.tre;
 
 report - ; 
+
 loop 1 %1
 	cc ]. [@#1 . ;
 	set 1 0;
@@ -76,14 +83,14 @@ loop 1 %1
 	macfloat 1;
 	le;
         silent - console;
-        quote *****THE AVERAGE LENGTH OF TREE IN PARTITION #1 IS 'mislengths[#1]' &10
+        quote *****THE AVERAGE LENGTH OF TREE IN PARTITION #1 IS 'mislengths[#1]' &10;
         silent = all ; 
 stop;
 
 /** do constrained searches **/
 keep 0;
 p base.tre;
-silent - console ;
+silent - console ; 
 quote &10&10&10----------------------&10Starting to search ... ; 
 silent = all ; 
 set 3 nnodes[ntrees] - ( ntax+2 ) ;
@@ -151,3 +158,4 @@ quote -         |                                              |;
 quote -         \----------------------------------------------/;
 
 proc/;
+
