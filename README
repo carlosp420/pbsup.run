@@ -1,6 +1,0 @@
-==Partitioned Bremer Support script for TNT==
-
-This is a script to be run in the phylogenetics software TNT by Goloboff et al.
-This script performs a Partitioned Bremer Support analysis for N number of partitions.
-
-You will find some documentation and troubleshooting here: http://nymphalidae.utu.fi/cpena/software.html
